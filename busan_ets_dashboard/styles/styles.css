@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+html, body, [class*="css"], [data-testid="stApp"] { font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+[data-testid="stApp"] {background: #f3f6ff; color: #102544;}
+[data-testid="stHeader"] {background: transparent;}
+.block-container {padding-top: 1.25rem; padding-bottom: 2.4rem; max-width: 1500px;}
+[data-testid="stSidebar"] {background: linear-gradient(175deg, #142b4e 0%, #0b1e3b 88%);}
+[data-testid="stSidebar"] * {color: #f7fbff;}
+[data-testid="stSidebar"] [data-testid="stRadio"] label {border-radius: 9px;}
+[data-testid="stSidebar"] .stRadio [data-testid="stWidgetLabel"] {display: none;}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] {gap: 0.7rem;}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label {padding: 0.72rem 0.8rem; background: rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label:has(input:checked) {background: #e2efff;}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label:has(input:checked) * {color: #102e60 !important; font-weight: 800;}
+.brand {padding: 1.5rem 0.5rem 1.7rem; text-align: center;}
+.brand-icon {font-size: 2.78rem;line-height: 1.16;margin-bottom: 0.4rem;}
+.brand-text {font-size: 1.36rem; font-weight: 800;line-height:1.4; letter-spacing:-0.04em;}
+.brand-caption {font-size:1rem;color:#a9caed !important;margin-top:0.4rem;}
+.section-label {display: inline-block; background: #172846; padding: 0.31rem 0.77rem; border-radius: 8px; color: white; font-weight: 700; font-size: 1.17rem; margin-bottom: 0.35rem;}
+.headline {padding: 0.8rem 0.4rem 0.35rem;}
+.headline h1 {font-size:2.45rem !important;margin:0 0 0.3rem !important; color:#0c2354 !important;letter-spacing:-0.07em;font-weight:850;}
+.headline p {font-size:1.19rem;color:#43587d;margin:0;}
+.panel-header {font-size:1.38rem;font-weight:800;color:#0e2b61;border-left:5px solid #0868e8;padding-left:10px;margin:0.7rem 0 0.62rem;}
+.validation-header {display:flex;align-items:baseline;flex-wrap:wrap;column-gap:.65rem;row-gap:.2rem;margin:.7rem 0 .62rem;}
+.validation-header .panel-header {margin:0;}
+.validation-period {color:#506988;font-size:1.09rem;font-weight:600;line-height:1.4;}
+.explainer {background:linear-gradient(110deg, #ecf3ff, #f8faff);border:1px solid #d9e6f9;border-radius:14px;padding:.87rem 1.08rem;margin: 0.85rem 0 0.5rem;box-shadow:0 5px 15px rgba(15,60,121,.03);}
+.explainer-title {font-size:1.43rem;font-weight:800;color:#10346e;margin-bottom:.3rem;}
+.explainer-desc {font-size:1.20rem;color:#385173;line-height:1.45;}
+.info-card,.kpi-card {background: linear-gradient(145deg,#ebf2ff,#e0eafb);border:1px solid #d8e4f7; border-radius: 13px; padding: .75rem .8rem; min-height:126px; box-shadow:0 2px 9px rgba(24,58,114,.04);}
+.info-card .card-label,.kpi-card .card-label{font-weight:700;font-size:1.17rem;color:#163969;margin-bottom:.37rem;}
+.info-card .card-value {font-size: 1.46rem;font-weight:800;color:#122e62;line-height:1.28;overflow-wrap:anywhere;}
+.info-card .card-detail {font-size:1.04rem;color:#476183;margin-top:.3rem;line-height:1.35;word-break:keep-all;}
+.kpi-card {min-height:115px;text-align:center;}
+.kpi-card .card-value {font-size:2.08rem;font-weight:800;color:#0c2b68;line-height:1.25;}
+.dash {color:#8093b2!important;}
+.reason-card {background:linear-gradient(140deg,#edf3ff,#e4ecfd);border:1px solid #d8e3f8;border-radius:12px;padding:.72rem .82rem; min-height: 177px;}
+.reason-card .reason-title {font-weight:800;color:#123569;margin-bottom:.42rem;}
+.reason-item {font-size:1.19rem;margin:.35rem 0;color:#4a648d;line-height:1.42;word-break:keep-all;}
+.reason-item strong {color:#123569;font-weight:800;}
+.performance {width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px #dbe5f8;}
+.performance th {background:#e6eefb;font-size:1.09rem;color:#123269;font-weight:700; padding:.70rem .3rem;border-right:1px solid #d4dfef;text-align:center;}
+.performance td{font-size:1.20rem;color:#193869;padding: .76rem .3rem;border-right:1px solid #e0e8f3;text-align:center;}
+.performance td:first-child{background:#f0f5ff;font-weight:800;}
+.performance th:last-child,.performance td:last-child{border-right:none;}
+.performance .metric-en{display:block;font-size:1.12rem;font-weight:800;line-height:1.3;}
+.performance .metric-ko{display:block;font-size:.95rem;font-weight:500;line-height:1.32;white-space:normal;word-break:keep-all;margin-top:.17rem;color:#405d83;}
+.note {font-size: 1.08rem;color:#697f9f;line-height:1.45;margin-top:0.35rem;}
+.results-card {background:#edf3ff;border:1px solid #d5e2f8;border-radius:12px;padding: .8rem .82rem;min-height: 355px;}
+.results-card .title {font-size:1.30rem;font-weight:800;color:#173766;margin-bottom:.52rem;}
+.results-card .item {margin:.38rem 0;line-height:1.43;font-size:1.19rem;color:#587095;}
+.legend-row {font-size:1.07rem;color:#506b94;margin:0 0 .45rem;display:flex;gap:1.1rem;flex-wrap:wrap;}
+.legend-bullet {display:inline-block;width:12px;height:10px;margin-right:.3rem;border-radius:3px;background:#a5cafc;}
+.legend-blue {display:inline-block;width:16px;height:3px;background:#1365d8;vertical-align:middle;margin-right:.3rem;}
+.legend-red {display:inline-block;width:16px;height:3px;border-top:2px dashed #ed7184;vertical-align:middle;margin-right:.3rem;}
+[data-testid="stSegmentedControl"] {margin-top:0.25rem;margin-bottom:0.4rem;}
+[data-testid="stSegmentedControl"] button[aria-checked="true"]{background:#1568d9!important;color:white!important;}
+@media (max-width:960px){.headline h1{font-size:1.95rem!important}.kpi-card{min-height:110px}.results-card{min-height:200px}}
+
+/* ==== BUSAN CRUISE INSIGHT unified theme (frame template) ==== */
+.stApp {
+    background:
+        radial-gradient(ellipse at 5% 15%, rgba(255,255,255,.95) 0%, transparent 42%),
+        radial-gradient(ellipse at 95% 75%, rgba(121,190,245,.30) 0%, transparent 48%),
+        linear-gradient(135deg,#EAF6FF 0%,#DCEEFF 50%,#CDE5FA 100%) !important;
+    background-attachment: fixed !important;
+    color: #102544;
+}
+[data-testid="stAppViewContainer"], [data-testid="stMain"], .main,
+.main .block-container {background:transparent !important;}
+[data-testid="stHeader"] {background:transparent !important;}
+[data-testid="stSidebarNav"] {display:none !important;}
+section[data-testid="stSidebar"], section[data-testid="stSidebar"] > div,
+section[data-testid="stSidebar"] [data-testid="stSidebarContent"],
+section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+    background:#08274A !important;
+    background-image:none !important;
+}
+section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+    padding:1rem .7rem !important;
+}
+[data-testid="stSidebar"] * {color:#F6FBFF;}
+.sidebar-ship-figure {display:flex;justify-content:center;align-items:center;width:100%;padding:.2rem 0 .65rem;}
+.sidebar-ship-figure img {display:block;width:120px;height:auto;max-width:100%;object-fit:contain;}
+.sidebar-brand {padding: .35rem .3rem .6rem; text-align:left;}
+.sidebar-brand-title {font-size:1.70rem;line-height:1.03;font-weight:800;letter-spacing:.005em;color:#fff;}
+.sidebar-brand-desc {font-size:1rem;color:#AFC3D8;line-height:1.36;margin-top:.5rem;}
+.sidebar-brand-rule {border:0;border-top:1px solid #24547D;margin:1.05rem .45rem 1.05rem;}
+[data-testid="stSidebar"] .stRadio [data-testid="stWidgetLabel"] {display:none;}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] {gap:.65rem !important;}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label {
+    background:#17456F !important;
+    border:1px solid rgba(100,160,210,.14) !important;
+    border-left:6px solid transparent !important;
+    border-radius:12px !important;
+    padding:.75rem .57rem !important;
+    min-height:56px;
+    transition:background .16s;
+}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label:has(input:checked) {
+    background:linear-gradient(100deg,#1765A7,#1C5B91) !important;
+    border-left:6px solid #55BFFF !important;
+}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label:has(input:checked) *,
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label * {
+    color:white !important;
+    font-weight:700;
+}
+.sidebar-bottom-note {font-size:1rem;line-height:1.48;color:#AFC3D8;padding:.5rem .5rem;}
+.dashboard-frame-header {
+    box-sizing:border-box;width:100%;height:174px;
+    display:flex;align-items:center;
+    padding:22px 32px;
+    border:1px solid rgba(146,195,235,.9);
+    border-radius:16px;
+    overflow:hidden;
+    background-color:#DCEEFF;
+    background-size:100% 100%, auto 100%;
+    background-position:center, right center;
+    background-repeat:no-repeat;
+    box-shadow:0 3px 12px rgba(57,112,164,.08);
+    margin:.2rem 0 1.05rem;
+}
+.dashboard-frame-header-text {display:flex;flex-direction:column;gap:.35rem;max-width:65%;}
+.dashboard-frame-title {font-size:clamp(28px,2.65vw,40px);font-weight:850;color:#071F55;line-height:1.15;margin:0;letter-spacing:.01em;}
+.dashboard-frame-subtitle {font-size:clamp(16px,1.38vw,20px);font-weight:650;color:#08274A;line-height:1.35;margin:0;}
+.main .block-container, [data-testid="stMainBlockContainer"] {
+    max-width:1550px !important;
+    padding-top:1.2rem !important;
+    padding-bottom:2rem !important;
+}
+[class*="st-key-dashboard-content"] {
+    background:rgba(255,255,255,.98);
+    border:1px solid #A7CEFA;
+    border-radius:19px;
+    padding:1.05rem 1.3rem 1.45rem;
+    box-shadow:0 3px 14px rgba(48,111,171,.045);
+}
+.headline h1 {color:#071F55 !important;}
+.headline p {color:#466583;}
+.section-label {background:#08274A;}
+.panel-header {color:#092B5B;border-left-color:#268DE6;}
+.explainer {background:linear-gradient(110deg,#EFF7FF,#FAFDFF);border-color:#CCE3FA;}
+.info-card,.kpi-card {
+    background:linear-gradient(145deg,#EDF6FF,#E3F0FE);
+    border:1px solid #CEE2F9;
+    box-shadow:0 2px 9px rgba(24,58,114,.045);
+}
+.reason-card,.results-card {background:#F0F7FF;border-color:#D0E4FB;}
+.performance {box-shadow:0 0 0 1px #CFE3F8;}
+.performance th {background:#E2F0FF;}
+.performance td:first-child {background:#F0F7FF;}
+[data-testid="stSegmentedControl"] button[aria-checked="true"] {background:#1765A7 !important;color:white !important;}
+[data-testid="stSegmentedControl"] button:not([aria-checked="true"]) {color:#163969 !important;}
+@media(max-width:900px) {
+    .dashboard-frame-header {height:140px;padding:15px 18px;}
+    .dashboard-frame-header-text {max-width:74%;}
+    [class*="st-key-dashboard-content"] {padding:.85rem .85rem 1.1rem;}
+    .sidebar-brand-title {font-size:1.49rem;}
+}
+
+
+/* 가독성 보강: 메뉴 및 차트 축 글씨만 소폭 확대 (기존 배치/이미지 크기 유지) */
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label p {font-size:1.27rem !important;}
+[data-testid="stSegmentedControl"] button {font-size:1.23rem !important;}
+.js-plotly-plot .plotly .xtick text,
+.js-plotly-plot .plotly .ytick text {font-size:15px !important;}
+.js-plotly-plot .plotly .g-ytitle text {font-size:17px !important;}
+
+/* 좁은 화면에서는 카드·표 안의 긴 한국어 문장이 겹치지 않도록 크기를 제한합니다. */
+@media (max-width: 1150px) {
+    .info-card .card-value {font-size:1.36rem;}
+    .info-card .card-detail {font-size:1.00rem;}
+    .info-card .card-label,.kpi-card .card-label {font-size:1.10rem;}
+    .kpi-card .card-value {font-size:1.94rem;}
+    .performance th {font-size:1.03rem;padding:.64rem .23rem;}
+    .performance td {font-size:1.13rem;padding:.7rem .22rem;}
+    .performance .metric-ko {font-size:.90rem;}
+    .reason-item,.results-card .item {font-size:1.13rem;}
+    .validation-period {font-size:1rem;}
+}
+@media (max-width: 960px) {
+    .js-plotly-plot .plotly .xtick text,
+    .js-plotly-plot .plotly .ytick text {font-size:13px !important;}
+    .js-plotly-plot .plotly .g-ytitle text {font-size:15px !important;}
+}
+
+/* 펼친 사이드바 기본 너비: 제공된 화면(약 313px)에 가까운 320px.
+   Streamlit은 사용자가 조정한 너비를 브라우저에 기억할 수 있으므로
+   인라인 너비보다 우선하는 CSS로 펼친 상태만 고정합니다.
+   접힌 상태(aria-expanded="false")는 건드리지 않습니다. */
+:root { --busan-sidebar-expanded-width: 320px; }
+[data-testid="stSidebar"][aria-expanded="true"] {
+    box-sizing: border-box !important;
+    width: var(--busan-sidebar-expanded-width) !important;
+    min-width: var(--busan-sidebar-expanded-width) !important;
+    max-width: var(--busan-sidebar-expanded-width) !important;
+    flex: 0 0 var(--busan-sidebar-expanded-width) !important;
+    flex-basis: var(--busan-sidebar-expanded-width) !important;
+}
+
+/* 사이드바 내부 내용은 새 너비를 넘지 않도록 맞춥니다. */
+[data-testid="stSidebar"] [data-testid="stSidebarContent"],
+[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+    box-sizing: border-box;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* 메뉴 이름은 반드시 한 줄로 표시합니다. */
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label {
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+[data-testid="stSidebar"] .stRadio [role="radiogroup"] label p {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+}
+
+/* 모바일처럼 좁은 화면에서는 화면 폭을 넘지 않도록 제한합니다. */
+@media (max-width: 520px) {
+    [data-testid="stSidebar"][aria-expanded="true"] {
+        width: 90vw !important;
+        min-width: 90vw !important;
+        max-width: 90vw !important;
+        flex: 0 0 90vw !important;
+        flex-basis: 90vw !important;
+    }
+}

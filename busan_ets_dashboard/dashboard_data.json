@@ -1,0 +1,282 @@
+{
+  "passengers": {
+    "model": {
+      "model_type": "ETS(A, Ad, A)",
+      "model_description": "승객 수의 추세와 계절성을 반영하며 감쇠 계수를 통해 시간이 지날수록 추세의 영향이 줄어들도록 설계된 모형입니다.",
+      "model_explanation": "(가산적 오차, 감쇠 가산 추세, 가산적 계절성)",
+      "training_period": "2023.01 ~ 2026.09 (45개월)",
+      "forecast_period": "2026.10 ~ 2027.12 (15개월)"
+    },
+    "metrics": {
+      "mae": 32424.27,
+      "rmse": 37124.42,
+      "mape": 51.31,
+      "wape": 54.34
+    },
+    "forecast_summary": {
+      "predicted": 1247850.14,
+      "monthly_average": 103987.51,
+      "peak_month": 10,
+      "peak_value": 120704.12,
+      "scheduled": null,
+      "difference": null
+    },
+    "monthly": [
+      {
+        "month": 1,
+        "forecast": 77356.65,
+        "scheduled": null,
+        "lower": 51219.75,
+        "upper": 103903.15
+      },
+      {
+        "month": 2,
+        "forecast": 78802.67,
+        "scheduled": null,
+        "lower": 50081.44,
+        "upper": 108309.96
+      },
+      {
+        "month": 3,
+        "forecast": 96726.91,
+        "scheduled": null,
+        "lower": 64732.73,
+        "upper": 128621.77
+      },
+      {
+        "month": 4,
+        "forecast": 115731.17,
+        "scheduled": null,
+        "lower": 81126.25,
+        "upper": 151847.37
+      },
+      {
+        "month": 5,
+        "forecast": 113093.43,
+        "scheduled": null,
+        "lower": 75770.35,
+        "upper": 150859.87
+      },
+      {
+        "month": 6,
+        "forecast": 106201.25,
+        "scheduled": null,
+        "lower": 65333.28,
+        "upper": 146855.52
+      },
+      {
+        "month": 7,
+        "forecast": 101754.44,
+        "scheduled": null,
+        "lower": 56971.63,
+        "upper": 145679.7
+      },
+      {
+        "month": 8,
+        "forecast": 109921.64,
+        "scheduled": null,
+        "lower": 61658.22,
+        "upper": 157686.81
+      },
+      {
+        "month": 9,
+        "forecast": 111313.71,
+        "scheduled": null,
+        "lower": 59387.23,
+        "upper": 163313.75
+      },
+      {
+        "month": 10,
+        "forecast": 120704.12,
+        "scheduled": null,
+        "lower": 65567.94,
+        "upper": 175798.2
+      },
+      {
+        "month": 11,
+        "forecast": 110572.81,
+        "scheduled": null,
+        "lower": 51802.35,
+        "upper": 169095.8
+      },
+      {
+        "month": 12,
+        "forecast": 105671.33,
+        "scheduled": null,
+        "lower": 43201.35,
+        "upper": 168468.75
+      }
+    ],
+    "key_results": [
+      "**월별 수요 변동 확인:** 2027년 월별 ETS 예측 승객 수는 약 7.7만~12.1만 명으로, 월별 차이를 고려할 필요",
+      "**승객 집중월 점검:** **10월**은 예측 승객 수가 가장 많은 달로, 운영계획 수립 시 입항 스케줄을 함께 확인할 필요"
+    ],
+    "page_description": "과거 부산항 크루즈 승객 수 데이터를 기반으로 승객 수를 예측합니다.",
+    "validation": {
+      "period": "2026.01 ~ 2026.09",
+      "basis": "승객 수",
+      "note": "※ 2026년 1~9월 실제 기록에 대한 모델 검증 결과입니다. 수치는 소수점 둘째 자리까지 표시했습니다."
+    },
+    "interpretation": [
+      "월별 예측 승객 수는 실제와 비교했을 때, 평균 3만 2천 명의 오차 발생",
+      "실제 승객 수를 100명이라고 정했을 때, 월별 예측에서 발생한 오차의 합계는 54명"
+    ],
+    "forecast_provenance": {
+      "source_script": "부산항_ETS_전체분석 (3).py",
+      "source_dataset": "크루즈입항.csv (previously supplied actual port-arrival passenger records)",
+      "data_start": "2023-01",
+      "train_end": "2026-09",
+      "forecast_method": "Direct 15-month forecast 2026-10 to 2027-12; extract Jan-Dec 2027",
+      "model": "ETS(A,Ad,A): error=add, trend=add, damped_trend=True, seasonal=add, seasonal_periods=12, initialization_method=heuristic, scale=1000, maxiter=2000",
+      "statsmodels_version": "0.14.6",
+      "interval_method": "10,000 simulated paths, seed=20261030, monthly 2.5%/97.5% quantiles, non-negative clipping; 0.14.6 compatible random_state=RandomState(seed) instead of source rng=default_rng(seed); fixed-parameter approximate interval",
+      "forecast_sum_rule": "Sum original full-precision 2027 monthly point forecasts then round to 2 decimals, not sum rounded monthly results",
+      "scheduled_data_status": "2027 monthly scheduled passenger capacity unavailable; capacity and comparison intentionally null. BPA schedule capacity is not actual passengers.",
+      "status": "Recomputed from user-provided CSV and teammate code structure; not compared to teammate final export"
+    }
+  },
+  "arrivals": {
+    "model": {
+      "model_type": "ETS(A, N, A)",
+      "model_description": "입항건수의 수준과 계절적 변동을 반영하되 별도의 추세 성분은 적용하지 않는 모형입니다.",
+      "model_explanation": "(가산적 오차, 추세 없음, 가산적 계절성)",
+      "training_period": "2013.01 ~ 2026.09 (165개월)",
+      "forecast_period": "2026.10 ~ 2027.12 (15개월)"
+    },
+    "metrics": {
+      "mae": 15.07,
+      "rmse": 17.42,
+      "mape": 38.42,
+      "wape": 42.53
+    },
+    "forecast_summary": {
+      "predicted": 419.19,
+      "scheduled": 441,
+      "difference": -21.81
+    },
+    "monthly": [
+      {
+        "month": 1,
+        "forecast": 30.14,
+        "scheduled": 13,
+        "lower": 16.07,
+        "upper": 49.07
+      },
+      {
+        "month": 2,
+        "forecast": 29.65,
+        "scheduled": 28,
+        "lower": 12.4,
+        "upper": 50.21
+      },
+      {
+        "month": 3,
+        "forecast": 35.52,
+        "scheduled": 48,
+        "lower": 17.18,
+        "upper": 58.58
+      },
+      {
+        "month": 4,
+        "forecast": 41.39,
+        "scheduled": 49,
+        "lower": 22.83,
+        "upper": 65.51
+      },
+      {
+        "month": 5,
+        "forecast": 40.41,
+        "scheduled": 44,
+        "lower": 20.11,
+        "upper": 66.99
+      },
+      {
+        "month": 6,
+        "forecast": 36.78,
+        "scheduled": 40,
+        "lower": 16.63,
+        "upper": 64.25
+      },
+      {
+        "month": 7,
+        "forecast": 34.29,
+        "scheduled": 39,
+        "lower": 13.01,
+        "upper": 63.21
+      },
+      {
+        "month": 8,
+        "forecast": 35.45,
+        "scheduled": 40,
+        "lower": 13.82,
+        "upper": 65.96
+      },
+      {
+        "month": 9,
+        "forecast": 36.53,
+        "scheduled": 39,
+        "lower": 14.07,
+        "upper": 68.91
+      },
+      {
+        "month": 10,
+        "forecast": 36.97,
+        "scheduled": 58,
+        "lower": 13.19,
+        "upper": 66.85
+      },
+      {
+        "month": 11,
+        "forecast": 32.06,
+        "scheduled": 26,
+        "lower": 6.43,
+        "upper": 65.25
+      },
+      {
+        "month": 12,
+        "forecast": 30.0,
+        "scheduled": 17,
+        "lower": 3.81,
+        "upper": 62.72
+      }
+    ],
+    "key_results": [
+      "**월별 차이 확인:** 연간 예측 규모는 예정 건수와 비슷하지만, 월별 차이가 커 운영계획 수립 시 주의 필요",
+      "**입항 집중월 점검:** 10월은 입항 예정이 가장 많은 달로, 일별 입항 집중 여부를 확인 필요"
+    ],
+    "forecast_provenance": {
+      "source_notebook": "forecast(2).ipynb: 동일 데이터·동일 ETS 설정을 statsmodels 0.14.6 환경에서 재계산 (원본 저장 출력은 0.15.0)",
+      "model": "ETS(A,N,A)",
+      "forecast_method": "2027 direct (2026-10~2027-12 연속 15개월 예측; 2027년 12개월 추출)",
+      "forecast_source": "statsmodels 0.14.6 재실행 결과; 2027년 월별 점예측 반올림 표시",
+      "schedule_source": "Step 14 schedule_2027 values entered in notebook; revision date unverified",
+      "annual_direct_95_approx_interval": {
+        "lower": 196.92,
+        "upper": 700.17
+      },
+      "monthly_95_interval": "statsmodels 0.14.6, ETS 다이렉트: 잔차 복원추출 1000개 경로 (seed 20261029), 각 월의 2.5% 및 97.5% 분위수. 연간 구간은 경로별 12개월 합계로 별도 계산.",
+      "notes": "2027 예정 건수와의 편차는 미래 실제값에 대한 예측오차가 아니다. 승객수 관련 값은 변경하지 않았다.",
+      "dashboard_result_statsmodels_version": "0.14.6",
+      "environment_for_arrival_recomputation": "Python 3.13.5; statsmodels 0.14.6; NumPy 2.3.5; Pandas 2.2.3; SciPy 1.17.0"
+    },
+    "page_description": "과거 부산항 크루즈 입항건수 데이터를 기반으로 입항건수를 예측합니다.",
+    "validation": {
+      "period": "2026.01 ~ 2026.09",
+      "basis": "입항건수",
+      "note": "※ 모델 성능 검증을 위한 테스트 결과표, 소수점 둘째 자리까지 표시"
+    },
+    "interpretation": [
+      "월별 예측 입항건수는 실제와 비교했을 때, 평균 15건의 오차 발생",
+      "실제 입항건수를 100건이라고 가정했을 때, 월별 예측에서 발생한 오차의 합계는 43건"
+    ]
+  },
+  "dashboard_metadata": {
+    "result_standardization": "통합 대시보드 ETS 예측 결과는 statsmodels 0.14.6 기준",
+    "arrival_source_analysis_env": "팀원2 제출 노트북 statsmodels 0.15.0; 대시보드용 결과만 0.14.6으로 재계산",
+    "passenger_source_analysis_env": "팀원1 제출 노트북 statsmodels 0.14.6; 기존 표시값 유지",
+    "version_note": "statsmodels 및 연관 라이브러리 버전과 계산 환경에 따라 추정값·소수점 예측값·시뮬레이션 예측구간이 일부 달라질 수 있다. 차이가 항상 작다고 보장할 수 없다.",
+    "dashboard_point_forecast_source": "입항수 ETS(A,N,A) 다이렉트 0.14.6 재계산",
+    "interval_simulation_runs": 1000,
+    "interval_seed": 20261029
+  }
+}
