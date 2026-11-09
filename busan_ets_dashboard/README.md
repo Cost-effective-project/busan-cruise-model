@@ -1,109 +1,134 @@
 # BUSAN CRUISE INSIGHT — 부산항 크루즈 예측 대시보드
 
-## 현재 프로젝트 구조
+부산항 크루즈 입항건수와 승객 수의 예측 결과를 시각화하는 **Streamlit 대시보드**입니다.
 
-현재 PyCharm 프로젝트 루트는 **`C:\work\cruise`**이며, 실제 Streamlit 앱은 그 아래 **`busan_ets_dashboard`** 폴더에 있습니다.
+이 앱은 이미 계산하여 `dashboard_data.json`에 저장한 결과를 보여주는 **고정형 대시보드**입니다. 앱을 열거나 새로고침할 때 ETS 모형을 다시 학습하지 않습니다.
+
+- **배포된 대시보드:** https://busan-cruise-insight.streamlit.app/
+- **GitHub 저장소:** https://github.com/Cost-effective-project/busan-cruise-model
+- **Streamlit Cloud 실행 파일:** `busan_ets_dashboard/app.py` (`main` 브랜치)
+- **별도 월별 갱신형 대시보드:** https://busan-cruise-ets.streamlit.app/ (`submission_dashboard/app.py`)
+
+## 1. 프로젝트 구조
+
+GitHub에 업로드한 저장소를 기준으로 한 주요 구조입니다.
 
 ```text
-C:\work\cruise\
-├── .venv/                      # 프로젝트 가상환경
-├── busan_ets_dashboard/       # 실제 Streamlit 대시보드
-│   ├── images/                # 대시보드 이미지 파일
-│   ├── styles/                # 대시보드 스타일 파일
-│   ├── app.py                 # 실행할 Streamlit 앱
-│   ├── dashboard_data.json    # 저장된 예측·검증 결과
-│   ├── README.md              # 이 문서
-│   └── requirements.txt       # 대시보드 실행용 라이브러리
-├── data/                       # 프로젝트 데이터 폴더
-├── forecast/                   # 분석 관련 폴더
-├── pyproject.toml
-├── uv.lock
-└── 제출용 대시보드.py         # 프로젝트 루트의 별도 Python 파일
+busan-cruise-model/
+├── busan_ets_dashboard/
+│   ├── app.py                  # 이 README의 실행 대상
+│   ├── dashboard_data.json     # 저장된 예측·검증 결과
+│   ├── requirements.txt        # 이 앱 실행에 필요한 라이브러리
+│   ├── README.md
+│   ├── images/
+│   │   └── sidebar_ship.png    # 사이드바 선박 이미지
+│   └── styles/
+│       └── styles.css          # 대시보드 스타일
+├── data/
+│   └── 크루즈입항.csv
+├── forecast/                   # 별도 예측 분석 자료
+└── submission_dashboard/       # 별도 월별 갱신형 대시보드
+    ├── app.py
+    ├── engine.py
+    ├── history.py
+    ├── requirements.txt
+    ├── README.md
+    └── templates/
+        ├── raw_template.csv
+        └── schedule_template.csv
 ```
 
-> **중요:** 이 README의 실행 대상은 `C:\work\cruise\busan_ets_dashboard\app.py`입니다. 프로젝트 루트의 `제출용 대시보드.py`와 구분해 주세요.
->
-> `images/`와 `styles/` 내부 파일명은 현재 폴더 화면만으로 확인되지 않았으므로 위 구조에는 폴더까지만 표시했습니다.
+> **주의:** 이전 로컬 작업 폴더 `C:\work\cruise`와 GitHub 업로드용 폴더 `C:\work\busan-cruise-model-upload`는 서로 다른 폴더입니다. 이 README는 **GitHub 업로드용 저장소**를 기준으로 작성했습니다. `.venv/`, `pyproject.toml`, `uv.lock`은 위 GitHub 배포 구조에 포함하지 않습니다.
 
-## PyCharm에서 실행 (권장: 대시보드 폴더에서 실행)
+## 2. Windows / PyCharm에서 로컬 실행
 
-PyCharm 터미널이 `(.venv) PS C:\work\cruise>`로 시작하고 가상환경이 활성화되어 있다면, 다음 순서로 실행합니다.
+PyCharm에서 GitHub 업로드용 프로젝트(`C:\work\busan-cruise-model-upload`)를 열고, 필요한 라이브러리가 설치될 Python 환경을 선택합니다.
 
-**1. 실제 앱 폴더로 이동**
+### 방법 A: 대시보드 폴더에서 실행 (권장)
 
-```powershell
-cd .\busan_ets_dashboard
-```
-
-터미널 경로가 `C:\work\cruise\busan_ets_dashboard`인지 확인합니다.
-
-**2. 필요한 라이브러리 설치 (최초 실행 또는 환경 변경 시)**
+PowerShell 터미널에 다음 명령어를 순서대로 입력합니다.
 
 ```powershell
+cd C:\work\busan-cruise-model-upload\busan_ets_dashboard
 python -m pip install -r requirements.txt
+python -m streamlit run app.py --server.port 8501
 ```
 
-**3. Streamlit 앱 실행**
+브라우저에서 **http://localhost:8501** 로 접속합니다. `python`은 선택한 가상환경의 Python이어야 합니다.
+
+다른 위치에 저장소를 복제했다면 첫 번째 명령어의 경로를 실제 위치로 바꾸면 됩니다.
+
+### 방법 B: 저장소 루트에서 실행
 
 ```powershell
-python -m streamlit run app.py
-```
-
-정상적으로 실행되면 터미널에 표시되는 `Local URL`(일반적으로 `http://localhost:8501`)로 접속합니다.
-
-### 프로젝트 루트에서 이동하지 않고 실행하는 방법
-
-터미널 위치가 **`C:\work\cruise`**일 때만 다음과 같이 하위 폴더의 경로를 지정할 수 있습니다.
-
-```powershell
+cd C:\work\busan-cruise-model-upload
 python -m pip install -r .\busan_ets_dashboard\requirements.txt
-python -m streamlit run .\busan_ets_dashboard\app.py
+python -m streamlit run .\busan_ets_dashboard\app.py --server.port 8501
 ```
 
-앱 내부에서 이미지나 스타일 파일을 현재 작업 폴더 기준 상대 경로로 읽는 경우에는 경로 문제가 생길 수 있으므로, **위의 권장 방법처럼 `busan_ets_dashboard` 폴더로 이동한 뒤 실행**하는 것이 안전합니다.
+이미지·스타일 등 부속 파일은 `busan_ets_dashboard/` 아래의 원래 위치를 유지해야 합니다.
 
-### 자주 발생하는 경로 오류
+## 3. 월별 갱신형 대시보드와 함께 실행
 
-- `File does not exist: app.py`: 현재 폴더에 `app.py`가 없는 상태에서 `python -m streamlit run app.py`를 실행했을 때 발생합니다.
-- 프로젝트 루트 `C:\work\cruise`에서는 `app.py`가 바로 아래에 있지 않으므로 `python -m streamlit run .\busan_ets_dashboard\app.py`처럼 **하위 폴더를 명시**해야 합니다.
-- 이미 `busan_ets_dashboard` 안으로 이동했다면 `python -m streamlit run .\busan_ets_dashboard\app.py`가 아니라 **`python -m streamlit run app.py`**를 실행합니다. 그렇지 않으면 폴더명이 중복됩니다.
-- 현재 위치와 파일 존재 여부를 확인하려면 아래 명령을 사용합니다.
+이 대시보드는 `8501` 포트, 별도 월별 갱신형 대시보드는 `8502` 포트를 사용하면 동시에 실행할 수 있습니다.
 
-  ```powershell
-  Get-Location
-  Test-Path .\app.py
-  Test-Path .\busan_ets_dashboard\app.py
-  ```
+**첫 번째 터미널 (고정형 대시보드):**
 
-  `Test-Path`는 경로가 존재하면 `True`, 없으면 `False`를 반환합니다. 현재 위치에 따라 둘 중 하나가 `True`가 되는 것이 정상입니다.
+```powershell
+cd C:\work\busan-cruise-model-upload\busan_ets_dashboard
+python -m streamlit run app.py --server.port 8501
+```
 
-## 이미지 및 스타일 관리
+**두 번째 터미널 (월별 갱신형 대시보드):**
 
-- **사이드바 선박 그림**: `busan_ets_dashboard/images/sidebar_ship.png` (기존 README 기준 필수). 기존 `app.py`에서 추출한 원본 PNG 바이트 그대로이며, 외관과 크기는 변경하지 않았습니다.
-- **상단 배너 그림**: `busan_ets_dashboard/images/header_banner.png` (기존 README 기준 선택). 배너 이미지 원본이 제공되지 않았던 당시에는 포함하지 않았습니다. 해당 이름으로 파일을 추가하면 기존 앱 코드의 동작에 따라 사용할 수 있습니다.
-- **대체 배너 그림**: `busan_ets_dashboard/images/header_banner_fallback.png` (기존 README 기준 선택). `header_banner.png`가 없을 때 사용하는 지원 경로입니다.
-- **스타일 폴더**: 현재 프로젝트에 `busan_ets_dashboard/styles/`가 있습니다. 실제 파일명과 로딩 방식은 `app.py`에서 확인하세요.
-- 배너 파일이 없을 때 기존 코드가 제공하는 그라데이션 배경을 사용하도록 구성되어 있습니다.
+```powershell
+cd C:\work\busan-cruise-model-upload\submission_dashboard
+python -m streamlit run app.py --server.port 8502
+```
 
-## 데이터 및 버전 기준
+두 번째 앱의 라이브러리가 설치되지 않았다면 해당 폴더의 `requirements.txt`를 먼저 설치해야 합니다. 자세한 내용은 `submission_dashboard/README.md`를 참고하세요.
 
-이 앱은 예측을 재학습하지 않습니다. `busan_ets_dashboard/dashboard_data.json`에 저장된 예측 결과를 시각화합니다. **기존 README에 기재된 대시보드 수치는 `statsmodels 0.14.6` 환경에서 산출된 결과를 유지**합니다.
+## 4. 데이터 및 예측 결과 기준
 
-- 입항건수 ETS(A,N,A) 2027년 다이렉트 예측: **419.19건**
-- 승객 수 ETS(A,Ad,A) 2027년 예측: **1,247,850.14명**
-- JSON의 모델 설정, 성능 지표, 월별 결과, 예측구간, 문구는 이번 **README 경로 수정 작업에서 변경하지 않았습니다.**
-- 별도 분석(원본 CSV, IPYNB, ETS 학습 스크립트)을 재실행하려면 그에 맞는 의존성이 추가로 필요합니다. **기존 README 기준 이 대시보드 실행에는 `statsmodels`가 필요하지 않습니다.**
-- 별도 최종 예측 분석 노트북의 `statsmodels 0.15.0` 기준 결과와, 이 대시보드 JSON의 `0.14.6` 기준 결과를 혼합하지 않습니다.
+이 앱의 표시값은 `busan_ets_dashboard/dashboard_data.json`을 기준으로 합니다.
 
-## 변경 범위 및 주의 사항
+| 항목 | JSON에 저장된 2027년 예측값 |
+| --- | ---: |
+| 크루즈 입항건수 — ETS(A,N,A) | 약 **419.19건** |
+| 크루즈 승객 수 — ETS(A,Ad,A) | 약 **1,247,850.14명** |
 
-이번 수정은 **프로젝트 폴더 구조에 따른 README 안내 수정만 수행**했습니다. `app.py`, `dashboard_data.json`, `requirements.txt`, 이미지, 스타일, 원본 데이터, 예측 모형은 수정하지 않았습니다.
+- 위 수치는 **예측값**이지 확정 실적이 아닙니다.
+- 기존 대시보드 JSON은 `statsmodels 0.14.6` 환경에서 산출된 결과를 유지합니다.
+- 별도 최종 분석 노트북의 `statsmodels 0.15.0` 기반 결과와 수치를 혼용하지 않습니다.
+- 이 대시보드의 실행 자체에는 ETS 재학습이 필요하지 않으므로, 별도 분석용 라이브러리인 `statsmodels`를 이 앱의 실행 의존성에 임의로 추가할 필요는 없습니다.
+- 데이터를 새로 계산하여 보여주려면 별도 분석 과정을 거쳐 `dashboard_data.json`을 갱신해야 합니다. **앱 새로고침만으로 예측 결과가 갱신되지는 않습니다.**
 
-기존 README에 기록되어 있던 앱 정리 이력은 다음과 같습니다.
+## 5. 배포 및 코드 업데이트
 
-- 기존 `app.py`에 포함되어 있던 약 36KB의 Base64 선박 PNG를 `images/sidebar_ship.png`로 분리했습니다.
-- 선박 이미지를 PNG 파일에서 다시 Base64로 읽도록 경로만 변경했습니다. HTML 이미지 출력 형식과 CSS는 그대로입니다.
-- 선택적 배너 경로를 `images/`로 통일했습니다. 배너가 없는 경우 기존 그라데이션 표시를 유지합니다.
-- 기존 정리 작업에서는 `requirements.txt`의 버전 범위와 앱의 문구 수정사항을 보존했습니다.
+Streamlit Community Cloud에서 다음 설정으로 배포한 앱입니다.
 
-이미지 경로 또는 파일명을 변경한 후에는 Streamlit 앱을 재실행하세요.
+| 항목 | 설정 |
+| --- | --- |
+| 저장소 | `Cost-effective-project/busan-cruise-model` |
+| 브랜치 | `main` |
+| Main file path | `busan_ets_dashboard/app.py` |
+| 앱 URL | https://busan-cruise-insight.streamlit.app/ |
+
+GitHub에 반영된 코드·데이터 변경 사항은 Streamlit Cloud 앱 업데이트에 사용됩니다. **README만 수정하는 경우 예측 모형이나 저장된 JSON 결과는 바뀌지 않습니다.**
+
+## 6. 자주 발생하는 문제
+
+| 증상 | 확인할 사항 |
+| --- | --- |
+| `File does not exist: app.py` | 현재 폴더가 `busan_ets_dashboard`인지 확인합니다. 저장소 루트에서는 `busan_ets_dashboard/app.py`로 실행합니다. |
+| `No module named 'streamlit'` | 활성화한 Python 환경에 `requirements.txt`의 라이브러리를 설치했는지 확인합니다. |
+| 이미지 또는 CSS가 표시되지 않음 | `images/sidebar_ship.png`, `styles/styles.css`가 폴더 안에 유지되어 있는지 확인합니다. |
+| `Port 8501 is already in use` | 기존 실행을 종료하거나 다른 포트(`--server.port 8503` 등)로 실행합니다. |
+| 클라우드 앱이 계속 흰색 로딩 화면을 보임 | 강력 새로고침 또는 시크릿 창에서 확인하고, 필요하면 해당 사이트 데이터 삭제 후 다시 접속합니다. 배포 로그도 함께 확인합니다. |
+| 예측값이 자동으로 바뀌지 않음 | 정상입니다. 이 앱은 `dashboard_data.json`에 저장된 결과를 표시합니다. |
+
+실행 종료는 해당 터미널에서 **Ctrl + C**를 누르면 됩니다.
+
+---
+
+이 README는 **실행 경로와 배포 안내를 최신화한 문서**입니다. 이 문서의 변경 자체는 `app.py`, `dashboard_data.json`, 이미지, CSS, 라이브러리 버전 또는 예측 결과를 변경하지 않습니다.
